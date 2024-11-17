@@ -1,7 +1,29 @@
 pip install nltk scikit-learn tensorflow numpy
 intents = [
-    {"intent": "greeting", "patterns": ["Hi", "Hello", "How are you?"], "responses": ["Hello!", "Hi there!", "How can I help you?"]},
-    {"intent": "goodbye", "patterns": ["Bye", "Goodbye", "See you"], "responses": ["Goodbye!", "See you later!"]},
-    {"intent": "thanks", "patterns": ["Thank you", "Thanks"], "responses": ["You're welcome!", "Happy to help!"]},
-    {"intent": "no", "patterns": ["No", "Nope", "Not at all"], "responses": ["Okay, let me know if you need help later."]},
+    {
+        "intent": "greeting",
+        "patterns": ["Hi", "Hello", "Hey", "How are you?", "Good morning", "Good evening"],
+        "responses": ["Hello! How can I assist you today?", "Hi there! How can I help you?", "Hey! What can I do for you today?"]
+    },
+    {
+        "intent": "goodbye",
+        "patterns": ["Bye", "Goodbye", "See you later", "Thanks", "Talk to you later"],
+        "responses": ["Goodbye! Have a nice day!", "See you! Take care!", "Bye! Feel free to ask if you need anything."]
+    },
+    {
+        "intent": "product_inquiry",
+        "patterns": ["Tell me about the latest clothes", "What clothing do you have?", "Do you have any new arrivals?", "Show me new items"],
+        "responses": ["We have a range of new t-shirts, dresses, jeans, jackets, and more!", "Our new arrivals include trendy jackets and fashionable summer dresses.", "Check out our new collection of jeans and t-shirts!"]
+    },
+    {
+        "intent": "price_inquiry",
+        "patterns": ["How much does a t-shirt cost?", "What is the price of a jacket?", "How much is this dress?", "Price of jeans?"],
+        "responses": ["The price for a t-shirt starts at $20.", "Our jackets range from $50 to $100.", "The dresses are priced between $30 to $80.", "The jeans range from $25 to $60."]
+    },
+    {
+        "intent": "size_inquiry",
+        "patterns": ["What sizes do you have?", "Do you have small, medium, large sizes?", "What size is available for a jacket?", "Is this dress available in large size?"],
+        "responses": ["We offer sizes ranging from XS to XXL for most products.", "Our clothing items are available in small, medium, and large sizes.", "This jacket is available in sizes S, M, and L."]
+    }
 ]
+
