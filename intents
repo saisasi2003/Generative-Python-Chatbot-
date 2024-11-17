@@ -1,0 +1,7 @@
+pip install nltk scikit-learn tensorflow numpy
+intents = [
+    {"intent": "greeting", "patterns": ["Hi", "Hello", "How are you?"], "responses": ["Hello!", "Hi there!", "How can I help you?"]},
+    {"intent": "goodbye", "patterns": ["Bye", "Goodbye", "See you"], "responses": ["Goodbye!", "See you later!"]},
+    {"intent": "thanks", "patterns": ["Thank you", "Thanks"], "responses": ["You're welcome!", "Happy to help!"]},
+    {"intent": "no", "patterns": ["No", "Nope", "Not at all"], "responses": ["Okay, let me know if you need help later."]},
+]
