@@ -1,0 +1,66 @@
+import nltk
+import numpy as np
+from nltk.stem import WordNetLemmatizer
+from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Download NLTK resources
+nltk.download('punkt')
+nltk.download('wordnet')
+
+lemmatizer = WordNetLemmatizer()
+
+# Prepare the data
+patterns = []
+responses = []
+classes = []
+
+# Loop through the intents to prepare data
+for intent in intents:
+    for pattern in intent["patterns"]:
+        patterns.append(pattern)
+        responses.append(intent["responses"])
+    classes.append(intent["intent"])
+
+# Tokenize each word in the patterns
+def clean_up_sentence(sentence):
+    sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = [lemmatizer.lemmatize(w.lower()) for w in sentence_words]
+    return sentence_words
+
+# Create bag of words
+def bow(sentence, words):
+    sentence_words = clean_up_sentence(sentence)
+    bag = [0] * len(words)
+    for s in sentence_words:
+        for i, w in enumerate(words):
+            if w == s:
+                bag[i] = 1
+    return(np.array(bag))
+
+# Create a list of all words and classes
+all_words = []
+for pattern in patterns:
+    words = clean_up_sentence(pattern)
+    all_words.extend(words)
+
+# Lemmatize and remove duplicates
+all_words = sorted(list(set([lemmatizer.lemmatize(w.lower()) for w in all_words])))
+
+# Convert the labels into integers using LabelEncoder
+label_encoder = LabelEncoder()
+classes = label_encoder.fit_transform(classes)
+
+# Prepare the training set
+training_sentences = []
+training_labels = []
+
+for pattern in patterns:
+    training_sentences.append(pattern)
+    training_labels.append(label_encoder.transform([intent['intent']])[0])
+
+training_sentences = np.array(training_sentences)
+training_labels = np.array(training_labels)
+
+# Convert sentences into bag of words
+training_sentences_bow = [bow(sentence, all_words) for sentence in training_sentences]
