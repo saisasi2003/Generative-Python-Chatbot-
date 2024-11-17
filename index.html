@@ -150,6 +150,68 @@
         footer p {
             font-size: 1rem;
         }
+
+        /* Chatbot Styles */
+        .chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chatbox-header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chatbox-body {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chatbox-body p {
+            margin: 10px 0;
+        }
+
+        .chatbox-footer {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chatbox-footer input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chatbox-footer button {
+            width: 15%;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chatbox-footer button:hover {
+            background-color: #ff6347;
+        }
     </style>
 </head>
 <body>
@@ -210,11 +272,21 @@
         </section>
     </main>
 
+    <!-- Chatbot Section -->
+    <div class="chatbox">
+        <div class="chatbox-header">
+            Fashion Chatbot
+        </div>
+        <div class="chatbox-body" id="chatbox-body">
+            <p><strong>Bot:</strong> Hello! How can I assist you today?</p>
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer id="contact">
         <div class="container">
             <p>&copy; 2024 Fashion Store. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
