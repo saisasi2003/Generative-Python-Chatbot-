@@ -1,0 +1,21 @@
+import random
+
+def chatbot_response(text):
+    # Preprocess the user's input
+    bow_input = bow(text, all_words)
+    
+    # Get the model's prediction
+    prediction = model.predict(np.array([bow_input]))[0]
+    predicted_class = np.argmax(prediction)
+
+    # Get the response for the predicted class
+    intent = label_encoder.inverse_transform([predicted_class])[0]
+    for i in intents:
+        if i['intent'] == intent:
+            response = random.choice(i['responses'])
+            return response
+    return "Sorry, I didn't understand that."
+
+# Example of how to use the function
+user_input = input("You: ")
+print("Bot:", chatbot_response(user_input))
