@@ -1,0 +1,41 @@
+import tensorflow as tf
+import numpy as np
+import random
+import pickle
+
+# Load the trained model and other necessary objects
+model = tf.keras.models.load_model("clothing_chatbot_model.h5")
+label_encoder = pickle.load(open("label_encoder.pkl", "rb"))
+all_words = pickle.load(open("all_words.pkl", "rb"))
+
+# Function to process user input
+def clean_up_sentence(sentence):
+    sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = [lemmatizer.lemmatize(w.lower()) for w in sentence_words]
+    return sentence_words
+
+def bow(sentence, words):
+    sentence_words = clean_up_sentence(sentence)
+    bag = [0] * len(words)
+    for s in sentence_words:
+        for i, w in enumerate(words):
+            if w == s:
+                bag[i] = 1
+    return np.array(bag)
+
+def chatbot_response(text):
+    # Predict the intent
+    bow_input = bow(text, all_words)
+    prediction = model.predict(np.array([bow_input]))[0]
+    predicted_class = np.argmax(prediction)
+
+    # Get the intent label and select a random response
+    intent = label_encoder.inverse_transform([predicted_class])[0]
+    for i in intents:
+        if i['intent'] == intent:
+            return random.choice(i['responses'])
+    return "Sorry, I didn't understand that."
+
+# Example usage
+user_input = input("You: ")
+print("Bot:", chatbot_response(user_input))
